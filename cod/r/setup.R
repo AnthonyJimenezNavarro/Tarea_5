@@ -4,5 +4,6 @@ pacman::p_load(
   tidyr,
   dplyr,
   tidyverse,
-  corrplot
+  corrplot,
+  plotly
 )
