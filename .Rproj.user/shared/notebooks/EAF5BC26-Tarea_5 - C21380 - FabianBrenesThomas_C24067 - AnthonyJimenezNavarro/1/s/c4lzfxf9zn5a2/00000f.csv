@@ -1,0 +1,30 @@
+"0","# Cargar las configuraciones iniciales"
+"0","source(""cod/r/setup.R"")"
+"2","Installing package into ‘C:/Users/Anthony/AppData/Local/R/win-library/4.4’
+(as ‘lib’ is unspecified)
+"
+"2","Aviso:"
+"2"," unable to access index for repository http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.4:
+  no fue posible abrir la URL 'http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.4/PACKAGES'
+"
+"2","probando la URL 'https://cran.rstudio.com/bin/windows/contrib/4.4/corrplot_0.92.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 3846840 bytes (3.7 MB)
+"
+"2","downloaded 3.7 MB
+
+"
+"1","package ‘corrplot’ successfully unpacked and MD5 sums checked
+"
+"1","
+"
+"1",""
+"1","The downloaded binary packages are in
+	C:\Users\Anthony\AppData\Local\Temp\RtmpWsjcSm\downloaded_packages"
+"1",""
+"1","
+"
+"2","
+corrplot installed
+"

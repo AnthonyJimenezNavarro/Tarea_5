@@ -1,0 +1,8 @@
+pacman::p_load(
+  readxl,
+  ggplot2,
+  tidyr,
+  dplyr,
+  tidyverse,
+  corrplot
+)

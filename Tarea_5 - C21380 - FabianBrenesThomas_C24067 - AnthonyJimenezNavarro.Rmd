@@ -1,0 +1,100 @@
+---
+title: "Tarea_5 - C21380 - FabianBrenesThomas_C24067 - AnthonyJimenezNavarro"
+author: 
+  - Estudiantes
+  - Fabián Brenes Thomas - C21380
+  - Anthony Mauricio Jiménez Navarro - C24067
+date: "2024-07-03"
+output: 
+  rmdformats::downcute:
+    default_style: "dark"
+    downcute_theme: "chaos"
+---
+
+# Preparativos
+
+```{r, warning=FALSE, message=FALSE}
+# Cargar las configuraciones iniciales
+source("cod/r/setup.R")
+```
+
+```{r}
+# Se carga la base del archivo .xlsx
+Datos_original <- read_excel("data/Datos.xlsx")
+```
+
+# Tratamiento de los datos
+
+```{r}
+# Se eliminan las entradas que cuentan con valores NA, ya que las entradas con NA unicamente corresponden a titulos de los apartados, no resulta inadecuado. eliminar estos
+Datos <- Datos_original %>% drop_na()
+
+# Se transforman los datos a un formato long, esto para llevar a cabo la transposicion adecuada para estudiar los datos.
+Datos <- Datos %>%
+  pivot_longer(cols = -`Componente demográfico`, names_to = "Year", values_to = "Value")
+
+# Los datos previamente convertidos a un formato long ahora se pueden pasar a un formate wide, de forma que resulta mas adecuado llevar a cabo el estudio.
+Datos <- Datos %>%
+  pivot_wider(names_from = `Componente demográfico`, values_from = "Value")
+
+# Se convierten todas las variables a numeric
+Datos <- as.data.frame(sapply(Datos, as.numeric))
+```
+
+# Analisis exploratorio de datos
+
+```{r}
+summary(Datos)
+cor_matrix <- cor(Datos)
+```
+
+
+# Graficos
+
+```{r}
+ggplot(Datos, aes(x = Year, y = Reproduccion_bruta)) +
+  geom_line() +
+  geom_point() +  # To add points on the line
+  labs(title = "Reproducción Bruta por Año",
+       x = "Año",
+       y = "Reproducción Bruta") +
+  theme_minimal() +  # To apply a minimal theme
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+
+ggplot(Datos, aes(x = Year, y = `Tasa de crecimiento natural (por cien habitantes)`)) +
+  geom_line() +
+  geom_point() +  # To add points on the line
+  labs(title = "Tasa de crecimiento natural por Año",
+       x = "Año",
+       y = "Tasa de crecimiento natural") +
+  theme_minimal() +  # To apply a minimal theme
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+
+ggplot(Datos, aes(x = Year, y = `General (por mil habitantes)`)) +
+  geom_line() +
+  geom_point() +  # To add points on the line
+  labs(title = "Mortalidad general por mil habitantes por Año",
+       x = "Año",
+       y = "Mortalidad general por mil habitantes") +
+  theme_minimal() +  # To apply a minimal theme
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+
+ggplot(Datos, aes(x = Católicos, y = `Tasa global de fecundidad (por mujer)`)) +
+  geom_line() +
+  geom_point() +  # To add points on the line
+  labs(title = "Tasa de fecundidad por Casamientos catolicos",
+       x = "Casamientos catolicos",
+       y = "Tasa de fecundidad") +
+  theme_minimal() +  # To apply a minimal theme
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+
+ggplot(Datos, aes(x = Civiles, y = `Tasa global de fecundidad (por mujer)`)) +
+  geom_line() +
+  geom_point() +  # To add points on the line
+  labs(title = "Tasa de fecundidad por Casamientos civiles",
+       x = "Casamientos civiles",
+       y = "Tasa de fecundidad") +
+  theme_minimal() +  # To apply a minimal theme
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+```
+

@@ -1,0 +1,2 @@
+"0","# Se carga la base del archivo .xlsx"
+"0","Datos_original <- read_excel(""data/Datos.xlsx"")"
