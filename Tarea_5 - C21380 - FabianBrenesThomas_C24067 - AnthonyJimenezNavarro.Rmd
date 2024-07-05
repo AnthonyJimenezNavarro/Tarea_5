@@ -11,23 +11,22 @@ output:
     downcute_theme: "chaos"
 ---
 
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
 # Preparativos
-
-```{r, warning=FALSE, message=FALSE}
 # Cargar las configuraciones iniciales
 source("cod/r/setup.R")
 ```
 
-```{r}
+```{r, echo=FALSE}
 # Se carga la base del archivo .xlsx
-Datos_original <- read_excel("data/Datos.xlsx")
+Datos.original <- read_excel("data/Datos.xlsx")
 ```
 
+```{r, echo=FALSE}
 # Tratamiento de los datos
 
-```{r}
 # Se eliminan las entradas que cuentan con valores NA, ya que las entradas con NA unicamente corresponden a titulos de los apartados, no resulta inadecuado. eliminar estos
-Datos <- Datos_original %>% drop_na()
+Datos <- Datos.original %>% drop_na()
 
 # Se transforman los datos a un formato long, esto para llevar a cabo la transposicion adecuada para estudiar los datos.
 Datos <- Datos %>%
@@ -41,13 +40,125 @@ Datos <- Datos %>%
 Datos <- as.data.frame(sapply(Datos, as.numeric))
 ```
 
-# Analisis exploratorio de datos
+```{css, echo=FALSE}
+.break .nav-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr):
+  text-align: center;
+}
 
-```{r}
-summary(Datos)
-cor_matrix <- cor(Datos)
-corrplot(cor_matrix, "circle", tl.cex = 0.5)
+.break .nav-tabs:before,
+.break .nav-tabs:after {
+  content: unset;
+}
 ```
+
+# Analisis exploratorio de datos {.tabset .break}
+
+```{r, echo=FALSE}
+summary(Datos)
+cor.matrix <- cor(Datos)
+corrplot(cor.matrix, "circle", tl.cex = 0.5)
+```
+
+## Grafico 1
+```{r, echo=FALSE}
+grafico1 <- ggplot(Datos, aes(x = Year, y = Reproduccion_bruta)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Reproducción Bruta por Año",
+       x = "Año",
+       y = "Reproducción Bruta") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+p1.dinamico <- ggplotly(grafico1)
+
+p1.dinamico
+```
+
+## Grafico 2
+```{r}
+grafico2 <- ggplot(Datos, aes(x = Year, y = `Tasa de crecimiento natural (por cien habitantes)`)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Tasa de crecimiento natural por Año",
+       x = "Año",
+       y = "Tasa de crecimiento natural") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+p2.dinamico <- ggplotly(grafico2)
+
+p2.dinamico
+```
+
+## Grafico 3
+```{r}
+grafico3 <- ggplot(Datos, aes(x = Year, y = `General (por mil habitantes)`)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Mortalidad general por mil habitantes por Año",
+       x = "Año",
+       y = "Mortalidad general por mil habitantes") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+p3.dinamico <- ggplotly(grafico3)
+
+p3.dinamico
+```
+
+##Grafico 4
+```{r}
+grafico4 <- ggplot(Datos, aes(x = Year, y = Poblacion_total)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Poblacion total por Año",
+       x = "Año",
+       y = "Poblacion total") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+p4.dinamico <- ggplotly(grafico4)
+
+p4.dinamico
+```
+
+##Grafico 5
+```{r}
+grafico5 <- ggplot(Datos, aes(x = Year, y = `Tasa de nupcialidad (por mil habitantes)`)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Tasa de nupcialidad por mil habitantes por Año",
+       x = "Año",
+       y = "Nupcialidad por mil habitantes") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+p5.dinamico <- ggplotly(grafico5)
+
+p5.dinamico
+```
+
+##Grafico resumen
+```{r}
+grafico.combinado <- ggplot(Datos) +
+  geom_line(aes(x = Year, y = Reproduccion_bruta, color = "Reproducción Bruta")) +
+  geom_point(aes(x = Year, y = Reproduccion_bruta, color = "Reproducción Bruta")) +
+  geom_line(aes(x = Year, y = `Tasa de crecimiento natural (por cien habitantes)`, color = "Tasa de crecimiento natural")) +
+  geom_point(aes(x = Year, y = `Tasa de crecimiento natural (por cien habitantes)`, color = "Tasa de crecimiento natural")) +
+  geom_line(aes(x = Year, y = `General (por mil habitantes)`, color = "Mortalidad general")) +
+  geom_point(aes(x = Year, y = `General (por mil habitantes)`, color = "Mortalidad general")) +
+  geom_line(aes(x = Year, y = `Tasa de nupcialidad (por mil habitantes)`, color = "Tasa de nupcialidad")) +
+  geom_point(aes(x = Year, y = `Tasa de nupcialidad (por mil habitantes)`, color = "Tasa de nupcialidad")) +
+  labs(title = "Diferentes Métricas por Año",
+       x = "Año",
+       y = "Valor",
+       color = "Métricas") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+grafico.combinado.dinamico <- ggplotly(grafico_combinado)
+grafico.combinado.dinamico
+```
+## {-}
 
 # Graficos dinamicos
 
