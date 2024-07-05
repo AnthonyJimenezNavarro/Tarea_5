@@ -203,10 +203,10 @@ text-align: justify}
 Por último tenemos un gráfico donde se pueden ver diversos indicadores en uno solo. Este gráfico presenta información valiosa para comparar los indicadores de tasa de natalidad, tasa de crecimiento y la mortalidad general.
 
 Observe como la tasa de crecimiento se puede explicar de mejor manera utilizando estos otros indicadores, note que en todos los años, entre estos tres indicadores se nota la misma relación. La natalidad cada vez es menor y disminuye cada año, mientras que la mortalidad está en crecimiento lento pero constante. Al bajar la natalidad y subir la mortalidad, se explica claramente el descenso en la tasa de crecimiento natural ya que la densidad de la población es cada vez menor según estos indicadores. Otra conclusión importante es la relación entre la tasa de natalidad y la tasa de fecundidad; note que cada vez la tasa de fecundidad es menor, es decir, que las mujeres están teniendo, en promedio, menos hijos, lo cual se explica con la baja en la natalidad.
-
 ## {-}
 
-#Datos utilizados
+
+# Datos utilizados
 
 A continuación, se presenta una tabla dinámica con los datos relevantes para la confección de los gráficos anteriores. 
 
