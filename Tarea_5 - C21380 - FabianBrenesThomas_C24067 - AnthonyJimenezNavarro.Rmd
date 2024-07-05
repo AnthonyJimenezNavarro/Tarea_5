@@ -91,8 +91,8 @@ Se puede observar en el gráfico que tanto los indicadores de reproducción como
 ## Crecimiento anual de la población
 ```{r, echo=FALSE}
 grafico2 <- ggplot(Datos, aes(x = Year, y = `Tasa de crecimiento natural (por cien habitantes)`)) +
-  geom_line() +
-  geom_point() +
+  geom_line(color = "blue") + 
+  geom_point(color = "blue") +
   labs(title = "Tasa de crecimiento natural por Año",
        x = "Año",
        y = "Tasa de crecimiento natural") +
@@ -113,8 +113,8 @@ Cuando se habla de la tasa de crecimiento natural, se trata de un indicador que 
 ## Mortalidad general
 ```{r, echo=FALSE}
 grafico3 <- ggplot(Datos, aes(x = Year, y = `General (por mil habitantes)`)) +
-  geom_line() +
-  geom_point() +
+  geom_line(color = "darkgreen") +
+  geom_point(color = "darkgreen") +
   labs(title = "Mortalidad general por mil habitantes por Año",
        x = "Año",
        y = "Mortalidad general por mil habitantes") +
@@ -136,8 +136,8 @@ En este gráfico se representa la tasa bruta de mortalidad, la cual representa l
 ## Población total
 ```{r, echo=FALSE}
 grafico4 <- ggplot(Datos, aes(x = Year, y = Poblacion_total)) +
-  geom_line() +
-  geom_point() +
+  geom_line(color = "red") + 
+  geom_point(color = "red") +
   labs(title = "Poblacion total por Año",
        x = "Año",
        y = "Poblacion total") +
@@ -157,8 +157,8 @@ La cantidad de población total del país tiene un comportamiento muy interesant
 ## Nupcialidad
 ```{r, echo=FALSE}
 grafico5 <- ggplot(Datos, aes(x = Year, y = `Tasa de nupcialidad (por mil habitantes)`)) +
-  geom_line() +
-  geom_point() +
+  geom_line(color = "bisque4") +
+  geom_point(color = "bisque4") +
   labs(title = "Tasa de nupcialidad por mil habitantes por Año",
        x = "Año",
        y = "Nupcialidad por mil habitantes") +
