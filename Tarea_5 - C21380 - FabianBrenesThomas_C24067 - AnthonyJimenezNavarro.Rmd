@@ -55,29 +55,34 @@ Datos <- as.data.frame(sapply(Datos, as.numeric))
 
 # Analisis exploratorio de datos {.tabset .break}
 
+## Fecundidad
 ```{r, echo=FALSE}
-summary(Datos)
-cor.matrix <- cor(Datos)
-corrplot(cor.matrix, "circle", tl.cex = 0.5)
-```
-
-## Grafico 1
-```{r, echo=FALSE}
-grafico1 <- ggplot(Datos, aes(x = Year, y = Reproduccion_bruta)) +
-  geom_line() +
-  geom_point() +
-  labs(title = "Reproducción Bruta por Año",
-       x = "Año",
-       y = "Reproducción Bruta") +
+grafico1 <- ggplot(Datos) +
+  geom_line(aes(x = Year, y = Reproduccion_bruta, color = "Reproducción Bruta")) +
+  geom_point(aes(x = Year, y = Reproduccion_bruta, color = "Reproducción Bruta")) +
+  geom_line(aes(x = Year, y = `Tasa global de fecundidad (por mujer)`, color = "Tasa global de fecundidad")) +
+  geom_point(aes(x = Year, y = `Tasa global de fecundidad (por mujer)`, color = "Tasa global de fecundidad")) +
+  labs(title = "Tasas de fecundidad",
+       x = "Valor",
+       y = "Reproducción Bruta",
+       color = "Métricas") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 p1.dinamico <- ggplotly(grafico1)
 
 p1.dinamico
 ```
+<style>
+body {
+text-align: justify}
+</style>
 
-## Grafico 2
-```{r}
+De acuerdo con el Instituto Nacional de Estadística y Censos, la tasa bruta de reproducción es el número de hijas que en promedio tendría cada mujer al final del periodo fértil, si durante su vida tiene sus hijos e hijas de acuerdo a las tasas de fecundidad por edad observadas en el país y año de interés; mientras que la tasa de fecundidad global es el mismo concepto a diferencia de que contabiliza el número promedio de hijos e hijas.
+
+Se puede observar en el gráfico que tanto los indicadores de reproducción como el de fecundidad siguen una misma tendencia en todos los años, lo que sugiere que la relación entre estos indicadores es constante y que en general la cantidad de hijas comparado con los hijos en general se mantiene a lo largo de los años. Ahora bien, con respecto a los valores como tal, podemos ver que en los últimos años, a partir del 2014, ambas tasas están disminuyendo anualmente, demostrando que cada vez la población está más lejos de reemplazarse a sí misma.
+
+## Crecimiento anual de la población
+```{r, echo=FALSE}
 grafico2 <- ggplot(Datos, aes(x = Year, y = `Tasa de crecimiento natural (por cien habitantes)`)) +
   geom_line() +
   geom_point() +
@@ -91,8 +96,15 @@ p2.dinamico <- ggplotly(grafico2)
 p2.dinamico
 ```
 
-## Grafico 3
-```{r}
+<style>
+body {
+text-align: justify}
+</style>
+
+Cuando se habla de la tasa de crecimiento natural, se trata de un indicador que cuantifica el crecimiento de una población en un año determinado. Note que en el gráfico anterior, tenemos los valores del crecimiento de la población cada cien habitantes; en los años 2000, la tasa era relativamente alta, superando el 10%, sin embargo al pasar de los años esta tasa va en disminución, la cual tiene un cambio drástico en el año 2020, ya que se presentó una caída de 7 puntos porcentuales. A partir de ese año, la tendencia ha permanecido en la baja y no pareciera tener indicios de volver a subir como en los primeros años del estudio. Es importante recalcar que a pesar de tener valores bajos, la tasa sigue siendo positiva, por lo que se puede asegurar que la población está creciendo a un ritmo lento anualmente. 
+
+## Mortalidad general
+```{r, echo=FALSE}
 grafico3 <- ggplot(Datos, aes(x = Year, y = `General (por mil habitantes)`)) +
   geom_line() +
   geom_point() +
@@ -106,9 +118,16 @@ p3.dinamico <- ggplotly(grafico3)
 
 p3.dinamico
 ```
+<style>
+body {
+text-align: justify}
+</style>
 
-##Grafico 4
-```{r}
+En este gráfico se representa la tasa bruta de mortalidad, la cual representa la cantidad de defunciones por cada mil habitantes por año. Se puede observar que a partir del año 2002 la mortalidad de la población costarricense aumenta paulatinamente cada año, hasta que en el 2020 y 2021 que hubo un crecimiento significativo en esta tasa. Estos datos se pueden atribuir a los efectos de la pandemia del Covid, la cual dejó muchas defunciones. Se puede notar que ya para el año 2022, la mortalidad bajó, y dado el dato del 2023 se puede especular que esta tasa se estabilizó, sin embargo, se estabilizó en un valor significativamente mayor que en los años previos a la pandemia.
+
+
+## Población total
+```{r, echo=FALSE}
 grafico4 <- ggplot(Datos, aes(x = Year, y = Poblacion_total)) +
   geom_line() +
   geom_point() +
@@ -121,9 +140,15 @@ p4.dinamico <- ggplotly(grafico4)
 
 p4.dinamico
 ```
+<style>
+body {
+text-align: justify}
+</style>
 
-##Grafico 5
-```{r}
+La cantidad de población total del país tiene un comportamiento muy interesante, ya que presenta un crecimiento constante desde el primer año de estudio, 2000, hasta el último, 2023. A pesar de lo anterior, se puede apreciar que el crecimiento era mayor en los primeros años, y conforme pasa el tiempo el crecimiento se estabilizó más, creciendo alrededor de 50.000 habitantes por año.  
+
+## Nupcialidad
+```{r, echo=FALSE}
 grafico5 <- ggplot(Datos, aes(x = Year, y = `Tasa de nupcialidad (por mil habitantes)`)) +
   geom_line() +
   geom_point() +
@@ -136,18 +161,23 @@ p5.dinamico <- ggplotly(grafico5)
 
 p5.dinamico
 ```
+<style>
+body {
+text-align: justify}
+</style>
+La nupcialidad representa la cantidad de matrimonios, ya sea por vía civil o por la iglesia, por cada mil habitantes. Podemos observar que no hay un comportamiento estable en la nupcialidad, ya que en periodos aumenta y luego disminuye, sin embargo, observando la línea de tiempo como tal, podemos ver como hay una tendencia al descenso de los matrimonios. Podemos observar dos valores relativamente atípicos relacionados con la pandemia, ya que en el 2020 se redujeron la cantidad de matrimonios, lo que se puede atribuir a la cuarentena, mientras que en el 2021 hubo un crecimiento que se puede atribuir a la misma razón, ya que es un periodo de vuelta a la normalidad. Note que en los dos últimos años se vuelve a estabilizar una tendencia a la baja, que tiende a un total de 4 matrimonios por mil habitantes.
 
-##Grafico resumen
-```{r}
+## Resumen indicadores
+```{r, echo=FALSE}
 grafico.combinado <- ggplot(Datos) +
-  geom_line(aes(x = Year, y = Reproduccion_bruta, color = "Reproducción Bruta")) +
-  geom_point(aes(x = Year, y = Reproduccion_bruta, color = "Reproducción Bruta")) +
+  geom_line(aes(x = Year, y = `Tasa global de fecundidad (por mujer)`, color = "Tasa de fecundidad")) +
+  geom_point(aes(x = Year, y = `Tasa global de fecundidad (por mujer)`, color = "Tasa de fecundidad")) +
   geom_line(aes(x = Year, y = `Tasa de crecimiento natural (por cien habitantes)`, color = "Tasa de crecimiento natural")) +
   geom_point(aes(x = Year, y = `Tasa de crecimiento natural (por cien habitantes)`, color = "Tasa de crecimiento natural")) +
   geom_line(aes(x = Year, y = `General (por mil habitantes)`, color = "Mortalidad general")) +
   geom_point(aes(x = Year, y = `General (por mil habitantes)`, color = "Mortalidad general")) +
-  geom_line(aes(x = Year, y = `Tasa de nupcialidad (por mil habitantes)`, color = "Tasa de nupcialidad")) +
-  geom_point(aes(x = Year, y = `Tasa de nupcialidad (por mil habitantes)`, color = "Tasa de nupcialidad")) +
+  geom_line(aes(x = Year, y = `Tasa bruta de natalidad (por mil habitantes)`, color = "Tasa de natalidad")) +
+  geom_point(aes(x = Year, y = `Tasa bruta de natalidad (por mil habitantes)`, color = "Tasa de natalidad")) +
   labs(title = "Diferentes Métricas por Año",
        x = "Año",
        y = "Valor",
@@ -158,102 +188,24 @@ grafico.combinado <- ggplot(Datos) +
 grafico.combinado.dinamico <- ggplotly(grafico.combinado)
 grafico.combinado.dinamico
 ```
+<style>
+body {
+text-align: justify}
+</style>
+
+
 ## {-}
 
-# Graficos dinamicos
-
-```{r}
-grafico1 <- ggplot(Datos, aes(x = Year, y = Reproduccion_bruta)) +
-  geom_line() +
-  geom_point() +
-  labs(title = "Reproducción Bruta por Año",
-       x = "Año",
-       y = "Reproducción Bruta") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
-p1_dinamico <- ggplotly(grafico1)
-
-grafico2 <- ggplot(Datos, aes(x = Year, y = `Tasa de crecimiento natural (por cien habitantes)`)) +
-  geom_line() +
-  geom_point() +
-  labs(title = "Tasa de crecimiento natural por Año",
-       x = "Año",
-       y = "Tasa de crecimiento natural") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
-p2_dinamico <- ggplotly(grafico2)
-
-grafico3 <- ggplot(Datos, aes(x = Year, y = `General (por mil habitantes)`)) +
-  geom_line() +
-  geom_point() +
-  labs(title = "Mortalidad general por mil habitantes por Año",
-       x = "Año",
-       y = "Mortalidad general por mil habitantes") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
-p3_dinamico <- ggplotly(grafico3)
-
-grafico4 <- ggplot(Datos, aes(x = Year, y = Poblacion_total)) +
-  geom_line() +
-  geom_point() +
-  labs(title = "Poblacion total por Año",
-       x = "Año",
-       y = "Poblacion total") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
-p4_dinamico <- ggplotly(grafico4)
-
-grafico5 <- ggplot(Datos, aes(x = Year, y = `Tasa de nupcialidad (por mil habitantes)`)) +
-  geom_line() +
-  geom_point() +
-  labs(title = "Tasa de nupcialidad por mil habitantes por Año",
-       x = "Año",
-       y = "Nupcialidad por mil habitantes") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
-p5_dinamico <- ggplotly(grafico5)
-```
-
-```{r}
-p1_dinamico
-p2_dinamico
-p3_dinamico
-p4_dinamico
-p5_dinamico
-```
-
-# Grafico resumen
-
-```{r}
-grafico_combinado <- ggplot(Datos) +
-  geom_line(aes(x = Year, y = Reproduccion_bruta, color = "Reproducción Bruta")) +
-  geom_point(aes(x = Year, y = Reproduccion_bruta, color = "Reproducción Bruta")) +
-  geom_line(aes(x = Year, y = `Tasa de crecimiento natural (por cien habitantes)`, color = "Tasa de crecimiento natural")) +
-  geom_point(aes(x = Year, y = `Tasa de crecimiento natural (por cien habitantes)`, color = "Tasa de crecimiento natural")) +
-  geom_line(aes(x = Year, y = `General (por mil habitantes)`, color = "Mortalidad general")) +
-  geom_point(aes(x = Year, y = `General (por mil habitantes)`, color = "Mortalidad general")) +
-  geom_line(aes(x = Year, y = `Tasa de nupcialidad (por mil habitantes)`, color = "Tasa de nupcialidad")) +
-  geom_point(aes(x = Year, y = `Tasa de nupcialidad (por mil habitantes)`, color = "Tasa de nupcialidad")) +
-  labs(title = "Diferentes Métricas por Año",
-       x = "Año",
-       y = "Valor",
-       color = "Métricas") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
-
-grafico_combinado_dinamico <- ggplotly(grafico_combinado)
-grafico_combinado_dinamico
-```
-
-#Tabla dinamica
+#Datos utilizados
 
 Tabla dinámica con los datos relevantes para la confección de los gráficos anteriores
 
 ```{r, echo=FALSE}
-Tabla_dinamica <- Datos %>%
+Tabla.dinamica <- Datos %>%
   select(Year, Poblacion_total, 
          Poblacion_hombres, 
          Poblacion_mujeres, 
+         `Tasa global de fecundidad (por mujer)`,
          Reproduccion_bruta, 
          `Tasa de crecimiento natural (por cien habitantes)`, 
          `General (por mil habitantes)`, 
@@ -262,10 +214,10 @@ Tabla_dinamica <- Datos %>%
          `Tasa de nupcialidad (por mil habitantes)`) %>%
   rename(Mortalidad_general = `General (por mil habitantes)`)
 
-Tabla <- datatable(Tabla_dinamica)
+Tabla <- datatable(Tabla.dinamica)
 ```
 
-```{r}
+```{r, echo=FALSE}
 Tabla
 ```
 
