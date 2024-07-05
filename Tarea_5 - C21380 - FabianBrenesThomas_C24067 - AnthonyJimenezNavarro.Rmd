@@ -245,3 +245,28 @@ grafico_combinado_dinamico <- ggplotly(grafico_combinado)
 grafico_combinado_dinamico
 ```
 
+#Tabla dinamica
+
+Tabla dinámica con los datos relevantes para la confección de los gráficos anteriores
+
+```{r, echo=FALSE}
+Tabla_dinamica <- Datos %>%
+  select(Year, Poblacion_total, 
+         Poblacion_hombres, 
+         Poblacion_mujeres, 
+         Reproduccion_bruta, 
+         `Tasa de crecimiento natural (por cien habitantes)`, 
+         `General (por mil habitantes)`, 
+         Mortalidad_hombres,
+         Mortalidad_mujeres,
+         `Tasa de nupcialidad (por mil habitantes)`) %>%
+  rename(Mortalidad_general = `General (por mil habitantes)`)
+
+Tabla <- datatable(Tabla_dinamica)
+```
+
+```{r}
+Tabla
+```
+
+
