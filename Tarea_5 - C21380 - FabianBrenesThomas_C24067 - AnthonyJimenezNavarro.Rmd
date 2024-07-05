@@ -53,8 +53,13 @@ Datos <- as.data.frame(sapply(Datos, as.numeric))
 }
 ```
 
-# Analisis exploratorio de datos {.tabset .break}
+# Indicadores demográficos {.tabset .break}
+<style>
+body {
+text-align: justify}
+</style>
 
+Los indicadores demográficos son un conjunto de datos que vinculan el crecimiento, los efectos en su composición y el tamaño de la población con los distintos elementos que intervienen en esto, como por ejemplo, la mortalidad y la fecundidad. A continuación, se presenta un pequeño análisis de los indicadores de Costa Rica a través de datos del Instituto Nacional de de Estadística y Censos.
 ## Fecundidad
 ```{r, echo=FALSE}
 grafico1 <- ggplot(Datos) +
@@ -193,18 +198,22 @@ body {
 text-align: justify}
 </style>
 
+Por último tenemos un gráfico donde se pueden ver diversos indicadores en uno solo. Este gráfico presenta información valiosa para comparar los indicadores de tasa de natalidad, tasa de crecimiento y la mortalidad general.
+
+Observe como la tasa de crecimiento se puede explicar de mejor manera utilizando estos otros indicadores, note que en todos los años, entre estos tres indicadores se nota la misma relación. La natalidad cada vez es menor y disminuye cada año, mientras que la mortalidad está en crecimiento lento pero constante. Al bajar la natalidad y subir la mortalidad, se explica claramente el descenso en la tasa de crecimiento natural ya que la densidad de la población es cada vez menor según estos indicadores. Otra conclusión importante es la relación entre la tasa de natalidad y la tasa de fecundidad; note que cada vez la tasa de fecundidad es menor, es decir, que las mujeres están teniendo, en promedio, menos hijos, lo cual se explica con la baja en la natalidad.
 
 ## {-}
 
 #Datos utilizados
 
-Tabla dinámica con los datos relevantes para la confección de los gráficos anteriores
+A continuación, se presenta una tabla dinámica con los datos relevantes para la confección de los gráficos anteriores. 
 
 ```{r, echo=FALSE}
 Tabla.dinamica <- Datos %>%
   select(Year, Poblacion_total, 
          Poblacion_hombres, 
          Poblacion_mujeres, 
+         `Tasa bruta de natalidad (por mil habitantes)`,
          `Tasa global de fecundidad (por mujer)`,
          Reproduccion_bruta, 
          `Tasa de crecimiento natural (por cien habitantes)`, 
