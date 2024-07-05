@@ -60,6 +60,8 @@ text-align: justify}
 </style>
 
 Los indicadores demográficos son un conjunto de datos que vinculan el crecimiento, los efectos en su composición y el tamaño de la población con los distintos elementos que intervienen en esto, como por ejemplo, la mortalidad y la fecundidad. A continuación, se presenta un pequeño análisis de los indicadores de Costa Rica a través de datos del Instituto Nacional de de Estadística y Censos.
+
+
 ## Fecundidad
 ```{r, echo=FALSE}
 grafico1 <- ggplot(Datos) +
